@@ -1,0 +1,45 @@
+/* Josefin Sans */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+/* IM Fell English */
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
+/* Tailwind CSS */
+@import "tailwindcss";
+
+@theme{
+  --color-Crema: #FDF0D5;
+  --color-Negro: #101010;
+  --color-Negro2: #1D1D1F;
+  --color-Rojo: #DD1F26;
+  --color-Amarillo: #EEBF33;
+  --color-Blanco: #E1E1E1;
+  --color-GrisForm: #959595;
+
+  --font-Josefin-Sans: 'Josefin Sans', sans-serif;
+  --font-IM-Fell-English: 'IM Fell English', serif;
+
+  @keyframes upanddown {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-15px);
+    }
+  }
+
+  --animate-upanddown: upanddown 4s ease-in-out infinite alternate;
+}
+
+body{
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Textura de papel */
+.paper-texture-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('/src/assets/images/paper-texture.webp');
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+  opacity: 1;
+}
