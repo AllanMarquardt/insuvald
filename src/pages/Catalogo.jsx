@@ -133,13 +133,14 @@ export default function Catalogo() {
                         filteredProducts.map(product => {
                             const imageUrl = product.acf?.foto_de_producto || ''
                             const price = product.acf?.precio_de_producto || ''
+                            const formattedPrice = price ? parseInt(price).toLocaleString('es-CL') : ''
                             
                             return (
                                 <ProductCard 
                                     key={product.id}
                                     image={imageUrl}
                                     title={product.title.rendered}
-                                    price={`$${price}`}
+                                    price={`$${formattedPrice}`}
                                 />
                             )
                         })

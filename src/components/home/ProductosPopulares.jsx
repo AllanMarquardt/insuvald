@@ -1,12 +1,31 @@
+import { useState, useEffect } from 'react';
 import ProductCard from '../shared/ProductCard.jsx';
 import RedPaintButton from '../../assets/images/red-paint-button.webp';
-import AceiteMaxiFrits from '../../assets/images/product-images/maxi-frits-10-litros.png';
-import PapasMinutoVerde from '../../assets/images/product-images/papas-prefritas-min-verde-11mm.png';
-import AlgaNoriKadoshi from '../../assets/images/product-images/alga-nori-kadoshi-10ud.png';
-import SoyaKadoshi from '../../assets/images/product-images/soya-kadoshi-12.5.png';
 import { Link } from 'react-router-dom';
 
 export default function ProductosPopulares() {
+    const [featuredProducts, setFeaturedProducts] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    // Cargar productos destacados desde WordPress
+    useEffect(() => {
+        const fetchFeaturedProducts = async () => {
+            try {
+                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
+                const data = await response.json()
+                
+                // Filtrar solo productos destacados
+                const featured = data.filter(product => product.acf?.producto_destacado === true)
+                setFeaturedProducts(featured)
+                setLoading(false)
+            } catch (error) {
+                console.error('Error al cargar productos destacados:', error)
+                setLoading(false)
+            }
+        }
+        fetchFeaturedProducts()
+    }, [])
+
     return (
         <>
             <section id='productos-populares' className="bg-Negro2 py-16 px-4 relative">
@@ -21,46 +40,26 @@ export default function ProductosPopulares() {
                     </div>
                     {/* Grid de cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-12 justify-items-center overflow-hidden">
-                        <ProductCard 
-                            image={AceiteMaxiFrits}
-                            title="Aceite Maxi Frits 10 Litros"
-                            price="$26.900"
-                        />
-                        <ProductCard 
-                            image={PapasMinutoVerde}
-                            title="Papas Pre Fritas Minuto Verde 1MM"
-                            price="$5.900"
-                        />
-                        <ProductCard 
-                            image={AlgaNoriKadoshi}
-                            title="Alga Nori Kadoshi 10 UND"
-                            price="$3.900"
-                        />
-                        <ProductCard 
-                            image={SoyaKadoshi}
-                            title="Soya Kadoshi 12.5 LT"
-                            price="$37.990"
-                        />
-                        <ProductCard 
-                            image={AceiteMaxiFrits}
-                            title="Aceite Maxi Frits 10 Litros"
-                            price="$26.900"
-                        />
-                        <ProductCard 
-                            image={PapasMinutoVerde}
-                            title="Papas Pre Fritas Minuto Verde 1MM"
-                            price="$5.900"
-                        />
-                        <ProductCard 
-                            image={AlgaNoriKadoshi}
-                            title="Alga Nori Kadoshi 10 UND"
-                            price="$3.900"
-                        />
-                        <ProductCard 
-                            image={SoyaKadoshi}
-                            title="Soya Kadoshi 12.5 LT"
-                            price="$37.990"
-                        />
+                        {loading ? (
+                            <p className="col-span-full text-center text-Crema">Cargando productos...</p>
+                        ) : featuredProducts.length === 0 ? (
+                            <p className="col-span-full text-center text-Crema">No hay productos destacados disponibles.</p>
+                        ) : (
+                            featuredProducts.map(product => {
+                                const imageUrl = product.acf?.foto_de_producto || ''
+                                const price = product.acf?.precio_de_producto || ''
+                                const formattedPrice = price ? parseInt(price).toLocaleString('es-CL') : ''
+                                
+                                return (
+                                    <ProductCard 
+                                        key={product.id}
+                                        image={imageUrl}
+                                        title={product.title.rendered}
+                                        price={`$${formattedPrice}`}
+                                    />
+                                )
+                            })
+                        )}
                     </div>
                     {/* Botón Ver Catálogo */}
                     <div className="flex justify-center mt-12">
