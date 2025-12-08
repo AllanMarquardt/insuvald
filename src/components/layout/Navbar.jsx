@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import LogoNucleo from '../../assets/images/insuvald-nucleo.png';
 import LogoNombre from '../../assets/images/insuvald-nombre.png';
 import QuoteButton from '../shared/QuoteButton.jsx';
-import RedPaintNavbar from '../../assets/images/red-paint-navbar.webp';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
@@ -36,9 +35,9 @@ export default function Navbar() {
                 {/* Menú de navegación (desktop) */}
                 <ul className="hidden lg:flex items-center gap-10 text-xl absolute left-1/2 -translate-x-1/2">
                     <Link to="/catalogo" className="cursor-pointer text-GrisForm hover:text-Negro transition">Catálogo</Link>
-                    <a href="#ubicacion-horarios" className="cursor-pointer text-GrisForm hover:text-Negro transition whitespace-nowrap">Ubicación y horarios</a>
-                    <a href='#despachos' className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</a>
-                    <a href='#contacto' className="cursor-pointer text-GrisForm hover:text-Negro transition">Contacto</a>
+                    <Link to="/#ubicacion-horarios" className="cursor-pointer text-GrisForm hover:text-Negro transition whitespace-nowrap">Ubicación y horarios</Link>
+                    <Link to='/#despachos' className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</Link>
+                    <Link to='/#contacto' className="cursor-pointer text-GrisForm hover:text-Negro transition">Contacto</Link>
                 </ul>
 
                 {/* Botón Cotizar (desktop) */}
@@ -58,10 +57,10 @@ export default function Navbar() {
 
             {/* Menú mobile (dropdown) */}
             <ul className={`lg:hidden absolute z-200 top-full left-0 right-0 bg-Crema/90 backdrop-blur-xl shadow-lg flex flex-col items-center gap-4 py-8 text-xl transition-all duration-300 ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-                <a className="cursor-pointer text-GrisForm hover:text-Negro transition">Catálogo</a>
-                <a href='#ubicacion-horarios' className="cursor-pointer text-GrisForm hover:text-Negro transition">Ubicación y horarios</a>
-                <a href='#despachos' className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</a>
-                <a href='#contacto' className="cursor-pointer text-GrisForm hover:text-Negro transition">Contacto</a>
+                <Link to="/catalogo" className="cursor-pointer text-GrisForm hover:text-Negro transition">Catálogo</Link>
+                <Link to='/#ubicacion-horarios' className="cursor-pointer text-GrisForm hover:text-Negro transition">Ubicación y horarios</Link>
+                <Link to='/#despachos' className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</Link>
+                <Link to='/#contacto' className="cursor-pointer text-GrisForm hover:text-Negro transition">Contacto</Link>
                 <li>
                     <QuoteButton />
                 </li>
