@@ -21,7 +21,8 @@ export default function Catalogo() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
+                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
+                const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s7/wordpress/wp-json/wp/v2/productos?per_page=100')
                 const data = await response.json()
                 setProducts(data)
                 setLoading(false)
@@ -37,7 +38,8 @@ export default function Catalogo() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/categoria-producto')
+                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/categoria-producto')
+                const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s7/wordpress/wp-json/wp/v2/categoria-producto')
                 const data = await response.json()
                 setCategories(data)
             } catch (error) {

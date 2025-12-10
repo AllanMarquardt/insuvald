@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import LogoNucleo from '../../assets/images/insuvald-nucleo.png';
 import LogoNombre from '../../assets/images/insuvald-nombre.png';
 import QuoteButton from '../shared/QuoteButton.jsx';
-import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,12 +25,12 @@ export default function Navbar() {
 
     return(
         <nav className="fixed top-0 left-1/2 -translate-x-1/2 z-500 max-w-[1600px] px-8 pt-8 md:py-2 w-full">
-            <div className={`flex justify-between items-center px-8 py-2 rounded-3xl transition duration-500 ${scrolled ? 'bg-Crema/70 shadow-lg' : ''}`}>
+            <div className={`flex justify-between items-center px-8 py-2 rounded-3xl transition duration-500 ${scrolled ? 'bg-Crema/80 backdrop-blur-sm shadow-lg' : ''}`}>
                 {/* Logo */}
-                <a href="/" className='flex items-center gap-1 cursor-pointer brightness-0 hover:brightness-100 transition duration-200'>
+                <Link to="/" className='flex items-center gap-1 cursor-pointer brightness-0 hover:brightness-100 transition duration-200'>
                     <img src={LogoNucleo} alt="Logo Insuvald Núcleo" className="w-10"/>
                     <img src={LogoNombre} alt="Logo Insuvald Nombre" className="w-24"/>
-                </a>
+                </Link>
 
                 {/* Menú de navegación (desktop) */}
                 <ul className="hidden lg:flex items-center gap-10 text-xl absolute left-1/2 -translate-x-1/2">
@@ -56,7 +56,7 @@ export default function Navbar() {
             </div>
 
             {/* Menú mobile (dropdown) */}
-            <ul className={`lg:hidden absolute z-200 top-full left-0 right-0 bg-Crema/90 backdrop-blur-xl shadow-lg flex flex-col items-center gap-4 py-8 text-xl transition-all duration-300 ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
+            <ul className={`lg:hidden absolute z-200 top-full left-0 right-0 bg-Crema/80 backdrop-blur-sm shadow-lg flex flex-col items-center gap-4 py-8 text-xl transition-all duration-300 ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
                 <Link to="/catalogo" className="cursor-pointer text-GrisForm hover:text-Negro transition">Catálogo</Link>
                 <Link to='/#ubicacion-horarios' className="cursor-pointer text-GrisForm hover:text-Negro transition">Ubicación y horarios</Link>
                 <Link to='/#despachos' className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</Link>

@@ -6,12 +6,14 @@ import Despachos from './components/home/Despachos.jsx'
 import Contacto from './components/home/Contacto.jsx'
 import Navbar from './components/layout/Navbar.jsx';
 import Catalogo from './pages/Catalogo.jsx'
+import SocialContact from './components/shared/SocialContact.jsx'
 
 
 function App() {
   return (
-    <Router>
+    <Router basename='/insuvald-s7'>
       <Navbar />
+      <SocialContact />
       <Routes>
         {/* Página principal */}
         <Route path="/" element={

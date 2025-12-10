@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /insuvald-s7/
+  
+  # No reescribir archivos/carpetas que existen
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !^/insuvald-s7/wordpress/
+  
+  # Redirigir todo a index.html (React Router)
+  RewriteRule ^ /insuvald-s7/index.html [L]
+</IfModule>

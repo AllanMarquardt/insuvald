@@ -10,7 +10,7 @@ export default function Despachos() {
             {/* Contenido */}
             <article className="max-w-7xl flex flex-col mx-auto px-4">
                 {/* Título y descripción */}
-                <div className="text-center mb-22">
+                <div className="text-center mb-16">
                     <h1 className="text-Amarillo font-IM-Fell-English text-[40px]">Despachos</h1>
                     <p className="text-Crema leading-5">A continuación puedes revisar nuestros despachos para Valdivia y comunas. <br />Si necesitas más información, comunícate con nosotros.</p>
                 </div>
