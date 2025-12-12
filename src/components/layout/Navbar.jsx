@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import LogoNucleo from '../../assets/images/insuvald-nucleo.png';
 import LogoNombre from '../../assets/images/insuvald-nombre.png';
-import QuoteButton from '../shared/QuoteButton.jsx';
+import CatalogButton from '../shared/CatalogButton.jsx';
 
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -41,7 +41,7 @@ export default function Navbar() {
                 </ul>
 
                 {/* Botón Cotizar (desktop) */}
-                <QuoteButton className="hidden lg:flex mr-5 shadow-xl" />
+                <CatalogButton className="hidden lg:flex mr-5 shadow-xl" />
 
                 {/* Menú hamburguesa (mobile) */}
                 <button 
@@ -62,7 +62,7 @@ export default function Navbar() {
                 <Link to='/#despachos' className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</Link>
                 <Link to='/#contacto' className="cursor-pointer text-GrisForm hover:text-Negro transition">Contacto</Link>
                 <li>
-                    <QuoteButton />
+                    <CatalogButton />
                 </li>
             </ul>
         </nav>
