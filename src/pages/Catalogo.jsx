@@ -21,8 +21,8 @@ export default function Catalogo() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
-                const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s7/wordpress/wp-json/wp/v2/productos?per_page=100')
+                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
+                // const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s7/wordpress/wp-json/wp/v2/productos?per_page=100')
                 const data = await response.json()
                 setProducts(data)
                 setLoading(false)
@@ -34,14 +34,33 @@ export default function Catalogo() {
         fetchProducts()
     }, [])
 
+
+
     // Cargar categorías desde WordPress
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/categoria-producto')
-                const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s7/wordpress/wp-json/wp/v2/categoria-producto')
+                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/categoria-producto')
+                // const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s7/wordpress/wp-json/wp/v2/categoria-producto')
                 const data = await response.json()
-                setCategories(data)
+
+                // Orden de categorías previo
+                const categoryOrder = [
+                    'insumos-para-sushi',
+                    'congelados-y-refrigerados',
+                    'huevos',
+                    'abarrotes',
+                    'limpieza-y-packaging'
+                ]
+
+                // Ordenar según el array categoryOrder
+                const sortedCategories = data.sort((a, b) => {
+                    const indexA = categoryOrder.indexOf(a.slug)
+                    const indexB = categoryOrder.indexOf(b.slug)
+                    return indexA - indexB
+                })
+
+                setCategories(sortedCategories)
             } catch (error) {
                 console.error('Error al cargar categorías:', error)
             }
@@ -61,12 +80,17 @@ export default function Catalogo() {
 
     // Filtrar productos por categoría y búsqueda
     const filteredProducts = products.filter(product => {
+        // Filtrado por categoría
         const matchesCategory = selectedCategory === 'todos' || 
             product['categoria-producto']?.includes(parseInt(selectedCategory))
         
+        // Filtrado por término de búsqueda
         const matchesSearch = product.title.rendered.toLowerCase().includes(searchTerm.toLowerCase())
+
+        // Excluir productos no disponibles
+        const isAvailable = !product.acf?.producto_no_disponible
         
-        return matchesCategory && matchesSearch
+        return matchesCategory && matchesSearch && isAvailable
     })
 
     return (

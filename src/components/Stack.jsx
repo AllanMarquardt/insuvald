@@ -62,9 +62,9 @@ export default function Stack({
 
   return (
     <div
-      className="relative"
+      className="relative w-full flex justify-center items-center"
       style={{
-        width: cardDimensions.width,
+        // width: cardDimensions.width,
         height: cardDimensions.height,
         perspective: 600
       }}

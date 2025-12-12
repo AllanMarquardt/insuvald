@@ -11,7 +11,7 @@ import SocialContact from './components/shared/SocialContact.jsx'
 
 function App() {
   return (
-    <Router basename='/insuvald-s7'>
+    <Router>
       <Navbar />
       <SocialContact />
       <Routes>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../shared/ProductCard.jsx';
 import RedPaintButton from '../../assets/images/red-paint-button.webp';
+import YellowPaintButton from '../../assets/images/yellow-paint-button.webp';
 import { Link } from 'react-router-dom';
 
 export default function ProductosPopulares() {
@@ -11,12 +12,13 @@ export default function ProductosPopulares() {
     useEffect(() => {
         const fetchFeaturedProducts = async () => {
             try {
-                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
-                const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s7/wordpress/wp-json/wp/v2/productos?per_page=100')
+                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
+                // const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s7/wordpress/wp-json/wp/v2/productos?per_page=100')
                 const data = await response.json()
                 
                 // Filtrar solo productos destacados
-                const featured = data.filter(product => product.acf?.producto_destacado === true)
+                const featured = data.filter(product => product.acf?.producto_destacado === true && !product.acf?.producto_no_disponible)
+                
                 setFeaturedProducts(featured)
                 setLoading(false)
             } catch (error) {
@@ -71,7 +73,18 @@ export default function ProductosPopulares() {
                     {/* Botón Ver Catálogo */}
                     <div className="flex justify-center mt-12">
                         <Link to='/catalogo' className="relative cursor-pointer group">
-                            <img src={RedPaintButton} alt="" className="w-70 h-16 transition duration-300 group-hover:scale-105 group-hover:drop-shadow-[0_0_15px_rgba(221,31,38,0.3)]" />
+                            {/* Imagen roja (default) */}
+                            <img 
+                                src={RedPaintButton} 
+                                alt="Pintura roja" 
+                                className="w-70 h-16 transition duration-300 group-hover:opacity-0" 
+                            />
+                            {/* Imagen amarilla (hover) */}
+                            <img 
+                                src={YellowPaintButton} 
+                                alt="Pintura amarilla" 
+                                className="absolute inset-0 w-70 h-16 opacity-0 transition duration-200 group-hover:opacity-100 group-hover:drop-shadow-[0_0_10px_rgba(250,204,21,0.3)]" 
+                            />
                             <span className="absolute inset-0 flex items-center justify-center text-Crema font-IM-Fell-English text-2xl pointer-events-none">
                                 Ver Catálogo
                             </span>
