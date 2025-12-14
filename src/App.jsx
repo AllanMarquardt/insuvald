@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
 import { QuoteProvider } from './context/QuoteContext'
 import Hero from './components/home/Hero.jsx'
 import ProductosPopulares from './components/home/ProductosPopulares.jsx'
@@ -8,12 +8,35 @@ import Contacto from './components/home/Contacto.jsx'
 import Navbar from './components/layout/Navbar.jsx';
 import Catalogo from './pages/Catalogo.jsx'
 import SocialContact from './components/shared/SocialContact.jsx'
+import { useEffect } from 'react'
 
+// Componente auxiliar para manejar el scroll
+function ScrollToHash() {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash) {
+      // Esperar un poco a que la página cargue
+      setTimeout(() => {
+        const element = document.querySelector(location.hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 600)
+    } else {
+      // Si no hay hash, ir al inicio
+      window.scrollTo(0, 0)
+    }
+  }, [location])
+
+  return null
+}
 
 function App() {
   return (
     <QuoteProvider>
       <Router>
+        <ScrollToHash />
         <Navbar />
         <SocialContact />
         <Routes>
