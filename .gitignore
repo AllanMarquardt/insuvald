@@ -25,3 +25,4 @@ dist-ssr
 
 # WordPress (opcional - si NO quieres subir WordPress)
 wordpress/
+sql/

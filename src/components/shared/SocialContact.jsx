@@ -1,7 +1,13 @@
 import WhatsApp from '../../assets/images/whatsapp-logo.webp';
 import Instagram from '../../assets/images/instagram-logo.webp';
+import { useQuote } from '../../context/QuoteContext'
 
 export default function SocialContact(){
+    const { quoteMode } = useQuote()
+    
+    // Si el modo cotización está activo, no mostrar nada
+    if (quoteMode) return null
+
     return (
         <div className='flex gap-3 fixed bottom-5 right-5 sm:bottom-12 sm:right-12 z-50'>
             <a href="https://wa.me/56982638704" target="_blank" rel="noopener noreferrer">

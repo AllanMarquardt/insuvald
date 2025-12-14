@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import ProductCard from '../components/shared/ProductCard'
 import CategoryButton from '../components/catalogo/CategoryButton'
+import QuoteButton from '../components/cotizacion/QuoteButton'
+import QuotePanel from '../components/cotizacion/QuotePanel'
+import { useQuote } from '../context/QuoteContext'
 import InfinityIcon from '../components/icons/InfinityIcon';
 import ShrimpIcon from '../components/icons/ShrimpIcon';
 import SnowflakeIcon from '../components/icons/SnowflakeIcon';
@@ -16,6 +19,7 @@ export default function Catalogo() {
     const [selectedCategory, setSelectedCategory] = useState('todos')
     const [searchTerm, setSearchTerm] = useState('')
     const [loading, setLoading] = useState(true)
+    const { quoteMode, toggleQuoteMode } = useQuote()
 
     // Cargar productos desde WordPress
     useEffect(() => {
@@ -139,7 +143,7 @@ export default function Catalogo() {
                 </div>
 
                 {/* Buscador */}
-                <div className="flex justify-center mb-12">
+                <div className="flex justify-center mb-6">
                     <input 
                         type="text"
                         placeholder="Buscar producto..."
@@ -147,6 +151,20 @@ export default function Catalogo() {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
+                </div>
+
+                {/* Botón Activar/Desactivar Modo Cotización */}
+                <div className="flex justify-center mb-12">
+                    <button
+                        onClick={toggleQuoteMode}
+                        className={`px-6 py-3 rounded-full font-bold text-lg transition-all duration-300 cursor-pointer ${
+                            quoteMode 
+                                ? 'bg-Amarillo text-Negro  shadow-lg shadow-Amarillo/30' 
+                                : 'bg-Rojo text-white hover:bg-Amarillo hover:text-Negro'
+                        }`}
+                    >
+                        {quoteMode ? '✕ Desactivar modo cotización' : 'Activar modo Cotización'}
+                    </button>
                 </div>
 
                 {/* Grid de productos */}
@@ -167,12 +185,20 @@ export default function Catalogo() {
                                     image={imageUrl}
                                     title={product.title.rendered}
                                     price={`$${formattedPrice}`}
+                                    productData={{
+                                        id: product.id,
+                                        rawPrice: parseInt(price) || 0
+                                    }}
                                 />
                             )
                         })
                     )}
                 </div>
             </article>
+
+            {/* FAB Button y Panel */}
+            <QuoteButton />
+            <QuotePanel />
         </section>
     )
 }

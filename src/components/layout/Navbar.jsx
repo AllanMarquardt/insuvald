@@ -24,7 +24,7 @@ export default function Navbar() {
     }, [ ]);
 
     return(
-        <nav className="fixed top-0 left-1/2 -translate-x-1/2 z-500 max-w-[1600px] px-8 pt-8 md:py-2 w-full">
+        <nav className="fixed top-0 left-1/2 -translate-x-1/2 z-500 max-w-[1600px] px-8 pt-2 sm:pt-8 md:py-2 w-full">
             <div className={`flex justify-between items-center px-8 py-2 rounded-3xl transition duration-500 ${scrolled ? 'bg-Crema/80 backdrop-blur-sm shadow-lg' : ''}`}>
                 {/* Logo */}
                 <Link to="/" className='flex items-center gap-1 cursor-pointer brightness-0 hover:brightness-100 transition duration-200'>

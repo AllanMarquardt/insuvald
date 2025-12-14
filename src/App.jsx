@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { QuoteProvider } from './context/QuoteContext'
 import Hero from './components/home/Hero.jsx'
 import ProductosPopulares from './components/home/ProductosPopulares.jsx'
 import UbicacionHorarios from './components/home/UbicacionHorarios.jsx'
@@ -11,29 +12,31 @@ import SocialContact from './components/shared/SocialContact.jsx'
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <SocialContact />
-      <Routes>
-        {/* Página principal */}
-        <Route path="/" element={
-          <>
-            <header>
-              <Hero />
-            </header>
-            <main>
-              <ProductosPopulares />
-              <UbicacionHorarios />
-              <Despachos />
-              <Contacto />
-            </main>
-          </>
-        } />
-        
-        {/* Página de catálogo */}
-        <Route path="/catalogo" element={<Catalogo />} />
-      </Routes>
-    </Router>
+    <QuoteProvider>
+      <Router>
+        <Navbar />
+        <SocialContact />
+        <Routes>
+          {/* Página principal */}
+          <Route path="/" element={
+            <>
+              <header>
+                <Hero />
+              </header>
+              <main>
+                <ProductosPopulares />
+                <UbicacionHorarios />
+                <Despachos />
+                <Contacto />
+              </main>
+            </>
+          } />
+          
+          {/* Página de catálogo */}
+          <Route path="/catalogo" element={<Catalogo />} />
+        </Routes>
+      </Router>
+    </QuoteProvider>
   )
 }
 
