@@ -55,8 +55,7 @@ export default function Navbar() {
             </div>
 
             {/* Menú mobile (dropdown) */}
-            <ul className={`lg:hidden absolute z-200 top-full left-0 right-0 bg-Crema/80 backdrop-blur-sm shadow-lg flex flex-col items-center gap-4 py-8 text-xl transition-all duration-300 ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-                <a href="/catalogo" className="cursor-pointer text-GrisForm hover:text-Negro transition">Catálogo</a>
+            <ul className={`lg:hidden absolute z-200 top-full left-0 right-0 bg-Crema/80 backdrop-blur-sm shadow-lg flex flex-col items-center gap-4 py-6 text-xl transition-all duration-300 ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
                 <a href='/#ubicacion-horarios' className="cursor-pointer text-GrisForm hover:text-Negro transition">Ubicación y horarios</a>
                 <a href='/#despachos' className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</a>
                 <a href='/#contacto' className="cursor-pointer text-GrisForm hover:text-Negro transition">Contacto</a>

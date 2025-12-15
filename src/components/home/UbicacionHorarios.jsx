@@ -22,7 +22,7 @@ export default function UbicacionHorarios() {
             {/* Overlay de textura de papel */}
             <div className="paper-texture-overlay"></div>
             {/* Contenido */}
-            <article className="max-w-7xl flex flex-col mx-auto px-4">
+            <article data-aos="fade-in" className="max-w-7xl flex flex-col mx-auto px-4">
                     {/* Título y descripción */}
                     <div className="text-center mb-12">
                         <h1 className="text-Negro font-IM-Fell-English text-[40px]">Ubicación y horarios</h1>

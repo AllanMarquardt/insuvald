@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import ProductCard from '../components/shared/ProductCard'
 import CategoryButton from '../components/catalogo/CategoryButton'
 import QuoteButton from '../components/cotizacion/QuoteButton'
@@ -168,32 +169,45 @@ export default function Catalogo() {
                 </div>
 
                 {/* Grid de productos */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-16 justify-items-center">
+                <motion.div 
+                    layout
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-16 justify-items-center"
+                >
                     {loading ? (
                         <p className="col-span-full text-center text-Negro">Cargando productos...</p>
                     ) : filteredProducts.length === 0 ? (
                         <p className="col-span-full text-center text-Negro">No se encontraron productos.</p>
                     ) : (
-                        filteredProducts.map(product => {
-                            const imageUrl = product.acf?.foto_de_producto || ''
-                            const price = product.acf?.precio_de_producto || ''
-                            const formattedPrice = price ? parseInt(price).toLocaleString('es-CL') : ''
-                            
-                            return (
-                                <ProductCard 
-                                    key={product.id}
-                                    image={imageUrl}
-                                    title={product.title.rendered}
-                                    price={`$${formattedPrice}`}
-                                    productData={{
-                                        id: product.id,
-                                        rawPrice: parseInt(price) || 0
-                                    }}
-                                />
-                            )
-                        })
+                        <AnimatePresence>
+                            {filteredProducts.map(product => {
+                                const imageUrl = product.acf?.foto_de_producto || ''
+                                const price = product.acf?.precio_de_producto || ''
+                                const formattedPrice = price ? parseInt(price).toLocaleString('es-CL') : ''
+                                
+                                return (
+                                    <motion.div
+                                        key={product.id}
+                                        layout
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 0.6 }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        <ProductCard 
+                                            image={imageUrl}
+                                            title={product.title.rendered}
+                                            price={`$${formattedPrice}`}
+                                            productData={{
+                                                id: product.id,
+                                                rawPrice: parseInt(price) || 0
+                                            }}
+                                        />
+                                    </motion.div>
+                                )
+                            })}
+                        </AnimatePresence>
                     )}
-                </div>
+                </motion.div>
             </article>
 
             {/* FAB Button y Panel */}

@@ -10,6 +10,10 @@ import Catalogo from './pages/Catalogo.jsx'
 import SocialContact from './components/shared/SocialContact.jsx'
 import { useEffect } from 'react'
 
+// Importar AOS
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
 // Componente auxiliar para manejar el scroll
 function ScrollToHash() {
   const location = useLocation()
@@ -33,6 +37,14 @@ function ScrollToHash() {
 }
 
 function App() {
+  // Inicializar AOS cuando el componente se monta
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: false,
+      offset: 400,
+    })
+  }, [])
   return (
     <QuoteProvider>
       <Router>

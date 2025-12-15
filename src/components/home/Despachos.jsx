@@ -8,7 +8,7 @@ export default function Despachos() {
             {/* Overlay de textura de papel */}
             <div className="paper-texture-overlay"></div>
             {/* Contenido */}
-            <article className="max-w-7xl flex flex-col mx-auto px-4">
+            <article data-aos="fade-in" className="max-w-7xl flex flex-col mx-auto px-4">
                 {/* Título y descripción */}
                 <div className="text-center mb-16">
                     <h1 className="text-Amarillo font-IM-Fell-English text-[40px]">Despachos</h1>

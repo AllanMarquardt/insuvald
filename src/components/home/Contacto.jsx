@@ -12,7 +12,7 @@ export default function Contacto(){
             {/* Overlay de textura de papel */}
             <div className="paper-texture-overlay"></div>
             {/* Contenido */}
-            <article className="max-w-7xl flex flex-col mx-auto px-4">
+            <article data-aos="fade-in" className="max-w-7xl flex flex-col mx-auto px-4">
                 {/* Título y descripción */}
                 <div className="text-center mb-12">
                     <h1 className="text-Negro font-IM-Fell-English text-[40px]">Contacto</h1>
@@ -49,7 +49,7 @@ export default function Contacto(){
 
 
                         {/* Columna de Formulario */}
-                        <div className="col-span-6 bg-Crema rounded-4xl px-8 lg:px-16 py-8 flex flex-col gap-6">
+                        <div className="col-span-6 bg-Crema/30 rounded-4xl px-8 lg:px-16 py-8 flex flex-col gap-6">
                             <div className="flex flex-col gap-4">
                                 {/* Nombre */}
                                 <div>

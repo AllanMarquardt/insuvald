@@ -65,7 +65,7 @@ ${formData.mensaje ? `Mensaje adicional:\n${formData.mensaje}` : ''}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-black/30 z-50"
+                        className="fixed inset-0 bg-black/60 z-50"
                     />
 
                     {/* Modal */}
