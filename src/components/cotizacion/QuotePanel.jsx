@@ -67,6 +67,11 @@ export default function QuotePanel() {
                                     </svg>
                                 </button>
                             </div>
+                            
+                            {/* Info */}
+                            <div className='pt-3 px-3'>
+                                <p className='text-sm text-Negro/60 leading-4 text-center'>Acá puedes enviarnos tu cotización. <br />El precio de los productos y las cantidades disponibles pueden variar. Te lo informaremos en la respuesta. </p>
+                            </div>
 
                             {/* Lista de productos */}
                             <div className="flex-1 overflow-y-auto p-4 space-y-3">
@@ -89,7 +94,7 @@ export default function QuotePanel() {
 
                             {/* Footer */}
                             {!isEmpty && (
-                                <div className="border-t border-Negro/10 p-4 space-y-2">
+                                <div className="border-t border-Negro/20 p-4 space-y-2">
                                     {/* Total */}
                                     <div className="bg-Amarillo/20 border-2 border-Amarillo rounded-lg p-3">
                                         <p className="text-Negro text-center">

@@ -37,7 +37,7 @@ function ScrollToHash() {
 }
 
 function App() {
-  // Inicializar AOS cuando el componente se monta
+  // Inicializar AOS
   useEffect(() => {
     AOS.init({
       duration: 800,
@@ -47,7 +47,7 @@ function App() {
   }, [])
   return (
     <QuoteProvider>
-      <Router>
+      <Router basename="/insuvald-s8">
         <ScrollToHash />
         <Navbar />
         <SocialContact />

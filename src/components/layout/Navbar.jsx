@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import LogoNucleo from '../../assets/images/insuvald-nucleo.png';
 import LogoNombre from '../../assets/images/insuvald-nombre.png';
 import CatalogButton from '../shared/CatalogButton.jsx';
@@ -7,8 +7,9 @@ import CatalogButton from '../shared/CatalogButton.jsx';
 export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const location = useLocation();
 
-        useEffect(() => {
+    useEffect(() => {
         const handleScroll = () => {
             if (window.scrollY > 50) {
                 setScrolled(true);
@@ -21,7 +22,20 @@ export default function Navbar() {
         
         // Cleanup
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [ ]);
+    }, []);
+
+    // Función para manejar navegación con hash
+    const handleHashClick = (hash) => {
+        if (location.pathname === '/') {
+            // Si ya estamos en home, solo hacer scroll
+            const element = document.querySelector(hash);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        // Si no estamos en home, el Link se encarga de navegar
+        setIsMenuOpen(false); // Cerrar menú mobile
+    };
 
     return(
         <nav className="fixed top-0 left-1/2 -translate-x-1/2 z-500 max-w-[1600px] px-8 pt-2 sm:pt-8 md:py-2 w-full">
@@ -34,9 +48,27 @@ export default function Navbar() {
 
                 {/* Menú de navegación (desktop) */}
                 <ul className="hidden lg:flex items-center gap-10 text-xl absolute left-1/2 -translate-x-1/2">
-                    <a href="/#ubicacion-horarios" className="cursor-pointer text-GrisForm hover:text-Negro transition whitespace-nowrap">Ubicación y horarios</a>
-                    <a href="/#despachos" className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</a>
-                    <a href="/#contacto" className="cursor-pointer text-GrisForm hover:text-Negro transition">Contacto</a>
+                    <Link 
+                        to="/#ubicacion-horarios" 
+                        onClick={() => handleHashClick('#ubicacion-horarios')}
+                        className="cursor-pointer text-GrisForm hover:text-Negro transition whitespace-nowrap"
+                    >
+                        Ubicación y horarios
+                    </Link>
+                    <Link 
+                        to="/#despachos" 
+                        onClick={() => handleHashClick('#despachos')}
+                        className="cursor-pointer text-GrisForm hover:text-Negro transition"
+                    >
+                        Despachos
+                    </Link>
+                    <Link 
+                        to="/#contacto" 
+                        onClick={() => handleHashClick('#contacto')}
+                        className="cursor-pointer text-GrisForm hover:text-Negro transition"
+                    >
+                        Contacto
+                    </Link>
                 </ul>
 
                 {/* Botón Cotizar (desktop) */}
@@ -56,9 +88,27 @@ export default function Navbar() {
 
             {/* Menú mobile (dropdown) */}
             <ul className={`lg:hidden absolute z-200 top-full left-0 right-0 bg-Crema/80 backdrop-blur-sm shadow-lg flex flex-col items-center gap-4 py-6 text-xl transition-all duration-300 ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-                <a href='/#ubicacion-horarios' className="cursor-pointer text-GrisForm hover:text-Negro transition">Ubicación y horarios</a>
-                <a href='/#despachos' className="cursor-pointer text-GrisForm hover:text-Negro transition">Despachos</a>
-                <a href='/#contacto' className="cursor-pointer text-GrisForm hover:text-Negro transition">Contacto</a>
+                <Link 
+                    to="/#ubicacion-horarios" 
+                    onClick={() => handleHashClick('#ubicacion-horarios')}
+                    className="cursor-pointer text-GrisForm hover:text-Negro transition"
+                >
+                    Ubicación y horarios
+                </Link>
+                <Link 
+                    to="/#despachos" 
+                    onClick={() => handleHashClick('#despachos')}
+                    className="cursor-pointer text-GrisForm hover:text-Negro transition"
+                >
+                    Despachos
+                </Link>
+                <Link 
+                    to="/#contacto" 
+                    onClick={() => handleHashClick('#contacto')}
+                    className="cursor-pointer text-GrisForm hover:text-Negro transition"
+                >
+                    Contacto
+                </Link>
                 <li>
                     <CatalogButton />
                 </li>

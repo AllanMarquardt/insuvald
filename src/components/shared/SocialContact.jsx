@@ -13,7 +13,7 @@ export default function SocialContact(){
             <a href="https://wa.me/56982638704" target="_blank" rel="noopener noreferrer">
                 <img src={WhatsApp} alt="WhatsApp Logo" className='h-12 w-12 sm:w-18 sm:h-18 hover:scale-110 transition duration-300 opacity-60 hover:opacity-100'/>
             </a>
-            <a href="https://www.instagram.com/insuvald" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/insumosvaldivia" target="_blank" rel="noopener noreferrer">
                 <img src={Instagram} alt="Instagram Logo" className='h-12 w-12 sm:w-18 sm:h-18 hover:scale-110 transition duration-300 opacity-60 hover:opacity-100'/>
             </a>
         </div>

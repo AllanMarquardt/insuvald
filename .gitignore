@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# WordPress (opcional - si NO quieres subir WordPress)
+# WordPress
 wordpress/
 sql/
