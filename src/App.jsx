@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
-import { QuoteProvider } from './context/QuoteContext'
+import { QuoteProvider, useQuote } from './context/QuoteContext'
 import Hero from './components/home/Hero.jsx'
 import ProductosPopulares from './components/home/ProductosPopulares.jsx'
 import UbicacionHorarios from './components/home/UbicacionHorarios.jsx'
@@ -8,6 +8,7 @@ import Contacto from './components/home/Contacto.jsx'
 import Navbar from './components/layout/Navbar.jsx';
 import Catalogo from './pages/Catalogo.jsx'
 import SocialContact from './components/shared/SocialContact.jsx'
+import Toast from './components/shared/Toast.jsx'
 import { useEffect } from 'react'
 
 // Importar AOS
@@ -36,6 +37,19 @@ function ScrollToHash() {
   return null
 }
 
+// Componente para manejar el Toast
+function ToastContainer() {
+  const { toast, setToast } = useQuote()
+
+  return (
+    <Toast 
+      message={toast.message}
+      isVisible={toast.isVisible}
+      onClose={() => setToast({ isVisible: false, message: '' })}
+    />
+  )
+}
+
 function App() {
   // Inicializar AOS
   useEffect(() => {
@@ -51,6 +65,7 @@ function App() {
         <ScrollToHash />
         <Navbar />
         <SocialContact />
+        <ToastContainer />
         <Routes>
           {/* Página principal */}
           <Route path="/" element={

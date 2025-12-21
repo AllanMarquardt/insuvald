@@ -22,6 +22,7 @@ export function QuoteProvider({ children }) {
         return []
     })
     const [isPanelOpen, setIsPanelOpen] = useState(false)
+    const [toast, setToast] = useState({ isVisible: false, message: '' })
 
     // Guardar cotización cuando cambia
     useEffect(() => {
@@ -57,6 +58,9 @@ export function QuoteProvider({ children }) {
             // Si no existe, agregarlo
             setQuoteItems([...quoteItems, product])
         }
+        
+        // Mostrar notificación
+        setToast({ isVisible: true, message: 'Producto añadido al carrito' })
     }
 
     // Actualizar cantidad de un item
@@ -101,7 +105,9 @@ export function QuoteProvider({ children }) {
             clearQuote,
             getTotal,
             isPanelOpen,
-            setIsPanelOpen
+            setIsPanelOpen,
+            toast,
+            setToast
         }}>
             {children}
         </QuoteContext.Provider>

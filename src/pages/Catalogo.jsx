@@ -180,7 +180,7 @@ export default function Catalogo() {
                 {/* Grid de productos */}
                 <motion.div 
                     layout
-                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-16 justify-items-center"
+                    className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-8 gap-y-16 justify-items-center"
                 >
                     {loading ? (
                         <p className="col-span-full text-center text-Negro">Cargando productos...</p>
