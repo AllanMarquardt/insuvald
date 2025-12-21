@@ -47,7 +47,7 @@ function App() {
   }, [])
   return (
     <QuoteProvider>
-      <Router basename="/insuvald-s8">
+      <Router basename="/insuvald">
         <ScrollToHash />
         <Navbar />
         <SocialContact />

@@ -26,8 +26,8 @@ export default function Catalogo() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
-                const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s8/wordpress/wp-json/wp/v2/productos?per_page=100')
+                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
+                // const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s8/wordpress/wp-json/wp/v2/productos?per_page=100')
                 const data = await response.json()
                 setProducts(data)
                 setLoading(false)
@@ -167,6 +167,15 @@ export default function Catalogo() {
                         {quoteMode ? '✕ Desactivar modo cotización' : 'Activar modo Cotización'}
                     </button>
                 </div>
+
+                {/* Contador de productos */}
+                {!loading && (
+                    <div className="text-center mb-4">
+                        <p className="text-Negro text-lg">
+                            Mostrando <strong>{filteredProducts.length}</strong> {filteredProducts.length === 1 ? 'producto' : 'productos'}
+                        </p>
+                    </div>
+                )}
 
                 {/* Grid de productos */}
                 <motion.div 

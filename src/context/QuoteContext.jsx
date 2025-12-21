@@ -3,26 +3,35 @@ import { createContext, useContext, useState, useEffect } from 'react'
 const QuoteContext = createContext()
 
 export function QuoteProvider({ children }) {
-    const [quoteMode, setQuoteMode] = useState(false)
-    const [quoteItems, setQuoteItems] = useState([])
-    const [isPanelOpen, setIsPanelOpen] = useState(false)
-
-    // Cargar cotización guardada al iniciar
-    useEffect(() => {
+    const [quoteMode, setQuoteMode] = useState(() => {
+        // Cargar estado del modo cotización
+        const savedMode = localStorage.getItem('insuvald-quote-mode')
+        return savedMode === 'true'
+    })
+    const [quoteItems, setQuoteItems] = useState(() => {
+        // Cargar productos guardados al iniciar
         const saved = localStorage.getItem('insuvald-quote')
         if (saved) {
             try {
-                setQuoteItems(JSON.parse(saved))
+                return JSON.parse(saved)
             } catch (error) {
                 console.error('Error al cargar cotización:', error)
+                return []
             }
         }
-    }, [])
+        return []
+    })
+    const [isPanelOpen, setIsPanelOpen] = useState(false)
 
     // Guardar cotización cuando cambia
     useEffect(() => {
         localStorage.setItem('insuvald-quote', JSON.stringify(quoteItems))
     }, [quoteItems])
+
+    // Guardar estado del modo cotización
+    useEffect(() => {
+        localStorage.setItem('insuvald-quote-mode', quoteMode)
+    }, [quoteMode])
 
     // Activar/Desactivar modo cotización
     const toggleQuoteMode = () => {

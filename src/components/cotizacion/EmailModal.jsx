@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 
 export default function EmailModal({ isOpen, onClose, quoteItems, total }) {
     const [formData, setFormData] = useState({
         nombre: '',
-        email: '',
+        correo: '',
         telefono: '',
         empresa: '',
         mensaje: ''
     })
     const [sending, setSending] = useState(false)
+    const [status, setStatus] = useState({ type: '', message: '' })
 
     const handleChange = (e) => {
         setFormData({
@@ -21,38 +23,60 @@ export default function EmailModal({ isOpen, onClose, quoteItems, total }) {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setSending(true)
+        setStatus({ type: '', message: '' })
 
+        // Validación básica
+        if (!formData.nombre || !formData.correo || !formData.telefono) {
+            setStatus({ 
+                type: 'error', 
+                message: 'Por favor completa todos los campos obligatorios' 
+            })
+            setSending(false)
+            return
+        }
+
+        // Formatear lista de productos
         const productList = quoteItems.map(item => 
-            `- ${item.title} x${item.quantity} = $${(item.price * item.quantity).toLocaleString('es-CL')}`
+            `- ${item.title} [x${item.quantity}] = $${(item.price * item.quantity).toLocaleString('es-CL')}`
         ).join('\n')
 
-        const emailBody = `
-NUEVA COTIZACIÓN - INSUVALD
+        try {
+            const result = await emailjs.send(
+                'service_s185hlc',
+                'template_btl174q',
+                {
+                    nombre: formData.nombre,
+                    correo: formData.correo,
+                    telefono: formData.telefono,
+                    empresa: formData.empresa || '',
+                    productos: productList,
+                    total: total.toLocaleString('es-CL'),
+                    mensaje: formData.mensaje || ''
+                },
+                'vuBgsNGHNJy1Twvyb'
+            )
 
-Datos del cliente:
-- Nombre: ${formData.nombre}
-- Email: ${formData.email}
-- Teléfono: ${formData.telefono}
-${formData.empresa ? `- Empresa: ${formData.empresa}` : ''}
-
-Productos solicitados:
-${productList}
-
-TOTAL: $${total.toLocaleString('es-CL')}
-
-${formData.mensaje ? `Mensaje adicional:\n${formData.mensaje}` : ''}
-        `
-
-        // Integración con servicio de email (simulado aquí)
-        console.log('Enviando email:', emailBody)
-
-        // Simulación de envío
-        setTimeout(() => {
+            if (result.text === 'OK') {
+                setStatus({ 
+                    type: 'success', 
+                    message: '¡Cotización enviada! Te contactaremos pronto.' 
+                })
+                // Limpiar formulario y cerrar después de 6 segundos
+                setTimeout(() => {
+                    setFormData({ nombre: '', correo: '', telefono: '', empresa: '', mensaje: '' })
+                    setStatus({ type: '', message: '' })
+                    onClose()
+                }, 6000)
+            }
+        } catch (error) {
+            console.error('Error al enviar cotización:', error)
+            setStatus({ 
+                type: 'error', 
+                message: 'Hubo un error al enviar la cotización. Intenta nuevamente.' 
+            })
+        } finally {
             setSending(false)
-            alert('¡Cotización enviada! Te contactaremos pronto.')
-            onClose()
-            setFormData({ nombre: '', email: '', telefono: '', empresa: '', mensaje: '' })
-        }, 1500)
+        }
     }
 
     return (
@@ -90,10 +114,21 @@ ${formData.mensaje ? `Mensaje adicional:\n${formData.mensaje}` : ''}
 
                         {/* Form */}
                         <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[calc(100vh-200px)] overflow-y-auto">
+                            {/* Mensaje de estado */}
+                            {status.message && (
+                                <div className={`p-4 rounded-lg text-center ${
+                                    status.type === 'success' 
+                                        ? 'bg-green-100 text-green-800 border border-green-300' 
+                                        : 'bg-red-100 text-red-800 border border-red-300'
+                                }`}>
+                                    {status.message}
+                                </div>
+                            )}
+
                             {/* Nombre */}
                             <div>
                                 <label className="block text-Negro font-bold mb-1 text-sm">
-                                    Nombre completo *
+                                    Nombre y apellido *
                                 </label>
                                 <input
                                     type="text"
@@ -109,12 +144,12 @@ ${formData.mensaje ? `Mensaje adicional:\n${formData.mensaje}` : ''}
                             {/* Email */}
                             <div>
                                 <label className="block text-Negro font-bold mb-1 text-sm">
-                                    Email *
+                                    Correo electrónico *
                                 </label>
                                 <input
                                     type="email"
-                                    name="email"
-                                    value={formData.email}
+                                    name="correo"
+                                    value={formData.correo}
                                     onChange={handleChange}
                                     required
                                     className="w-full px-4 py-2 border-2 border-Negro/20 rounded-lg focus:outline-none focus:border-Amarillo transition"
