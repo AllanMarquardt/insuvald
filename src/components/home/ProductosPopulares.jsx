@@ -12,8 +12,8 @@ export default function ProductosPopulares() {
     useEffect(() => {
         const fetchFeaturedProducts = async () => {
             try {
-                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
-                // const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald-s8/wordpress/wp-json/wp/v2/productos?per_page=100')
+                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
+                const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald/wordpress/wp-json/wp/v2/productos?per_page=100')
                 const data = await response.json()
                 
                 // Filtrar solo productos destacados
