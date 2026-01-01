@@ -20,7 +20,7 @@ export default function ProductCard({ image, title, price, productData }) {
     }
 
     return (
-        <div className={`bg-Blanco pt-4 h-78 w-55 relative overflow-hidden shadow-md transition-all duration-300 ${
+        <div className={`bg-Blanco pt-4 h-78 w-55 relative overflow-hidden shadow-md transition-all duration-300 group ${
             quoteMode ? 'ring-2 ring-Amarillo shadow-lg shadow-Amarillo/20' : ''
         }`}>
             {/* Círculo rojo */}
@@ -30,7 +30,7 @@ export default function ProductCard({ image, title, price, productData }) {
             <div className="bg-Negro absolute w-10 h-1.5 bottom-0 left-1/2 transform -translate-x-1/2"></div>
             {/* Card content */}
             <div className="w-[80%] h-[60%] flex flex-col items-center mx-auto">
-                <img src={image} alt={title} className="h-[85%] w-full object-contain drop-shadow-2xl mb-4" />
+                <img src={image} alt={title} className="h-[85%] w-full object-contain drop-shadow-2xl mb-4 group-hover:scale-120 group-hover:rotate-2 transition duration-400 ease-out" />
                 <span className="uppercase text-center font-light tracking-wide text-lg text-Negro leading-4.5">{title}</span>
             </div>
             {/* Precio */}

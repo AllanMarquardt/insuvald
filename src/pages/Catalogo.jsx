@@ -26,8 +26,8 @@ export default function Catalogo() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=500')
-                // const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald/wordpress/wp-json/wp/v2/productos?per_page=500')
+                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/productos?per_page=500')
+                const response = await fetch('https://insuvald.cl/wordpress/wp-json/wp/v2/productos?per_page=500')
                 const data = await response.json()
                 setProducts(data)
                 setLoading(false)
@@ -45,8 +45,8 @@ export default function Catalogo() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/categoria-producto')
-                // const response = await fetch('https://almarquardt.laboratoriodiseno.cl/insuvald/wordpress/wp-json/wp/v2/categoria-producto')
+                // const response = await fetch('http://localhost/insuvald/wordpress/wp-json/wp/v2/categoria-producto')
+                const response = await fetch('https://insuvald.cl/wordpress/wp-json/wp/v2/categoria-producto')
                 const data = await response.json()
 
                 // Orden de categorías previo
@@ -106,21 +106,24 @@ export default function Catalogo() {
             <img src={PaintKanji} alt="Imagen de Kanji" className="absolute pointer-events-none w-24 right-5 -top-15 opacity-100 hidden lg:block"/>
             
             <article className="max-w-7xl flex flex-col mx-auto px-4 relative z-10">
-                {/* Título */}
-                <div className="text-center mb-12">
+                {/* Título y descripción */}
+                <div className="text-center mb-12 max-w-3xl mx-auto">
                     <h1 className="text-Negro font-IM-Fell-English text-[40px]">
                         Catálogo de Productos
                     </h1>
-                    <p className="text-Negro leading-5">
-                        Estos son los productos que actualmente tenemos disponibles en nuestro local.
-                        <br />
-                        Para consultar stock, puedes ponerte en <Link to="/#contacto" className="text-Rojo underline">contacto</Link> con nosotros.
-                    </p>
+                    <div className="flex flex-col text-lg text-[#3f3f3f] leading-4">
+                        <p className="mb-2">
+                            Estos son los productos que actualmente tenemos disponibles en nuestro local.
+                        </p>
+                        <p>
+                            También puedes enviarnos una consulta de cotización. Haz click en el botón <strong>"Activar modo Cotización"</strong> para armar tu carrito.
+                        </p>
+                    </div>
                 </div>
 
                 {/* Filtros de categorías */}
                 <div className="text-center mb-8 max-w-5xl mx-auto">
-                    <h2 className="text-Negro text-2xl mb-4">Seleccione categorías:</h2>
+                    <h2 className="text-Negro text-2xl mb-1">Seleccione categorías:</h2>
                     <div className="flex flex-wrap justify-center gap-x-6 gap-y-4">
                         <CategoryButton 
                             icon={InfinityIcon}

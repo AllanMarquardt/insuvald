@@ -17,12 +17,12 @@ export default function Despachos() {
                 {/* Imágenes de despachos */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-16 justify-items-center">
                     {/* Valdivia */}
-                    <div className='flex flex-col items-center gap-4 max-w-92'>
+                    <div className='flex flex-col items-center gap-4 max-w-92 group'>
                         <div className='w-full max-w-72 aspect-square'>
                             <img 
                                 src={Valdivia} 
                                 alt="Foto de Valdivia" 
-                                className='rounded-full w-full h-full object-cover outline-dashed outline-[#D6BDF1] outline-6 -outline-offset-3'
+                                className='rounded-full w-full h-full object-cover outline-dashed outline-[#D6BDF1] outline-6 -outline-offset-3 group-hover:scale-110 transition-transform duration-500'
                             />
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#E1E1E1" className="size-22">
@@ -32,12 +32,12 @@ export default function Despachos() {
                         <span className='text-Crema text-2xl text-center mt-5'>Despacho <strong>GRATIS</strong> por compras sobre <strong className='text-[#A788C8]'>$10.000</strong></span>
                     </div>
                     {/* Comunas */}
-                    <div className='flex flex-col items-center gap-4 max-w-92'>
+                    <div className='flex flex-col items-center gap-4 max-w-92 group'>
                         <div className='w-full max-w-72 aspect-square'>
                             <img 
                                 src={SanJose} 
                                 alt="Foto de San Jose" 
-                                className='rounded-full w-full h-full object-cover outline-dashed outline-[#B64F3C] outline-6 -outline-offset-3'
+                                className='rounded-full w-full h-full object-cover outline-dashed outline-[#B64F3C] outline-6 -outline-offset-3 group-hover:scale-110 transition-transform duration-500'
                             />
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#E1E1E1" className="size-22">

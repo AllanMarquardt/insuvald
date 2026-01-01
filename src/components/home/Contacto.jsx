@@ -7,6 +7,8 @@ import UserIcon from "../icons/UserIcon"
 import PhoneIcon from "../icons/PhoneIcon"
 import ChatBubbleIcon from "../icons/ChatBubbleIcon"
 import Sakura from '../../assets/images/sakura.webp';
+import { Link } from 'react-router-dom';
+
 
 
 export default function Contacto(){
@@ -92,6 +94,7 @@ export default function Contacto(){
                 {/* Título y descripción */}
                 <div className="text-center mb-12">
                     <h1 className="text-Negro font-IM-Fell-English text-[40px]">Contacto</h1>
+                    <p>Recuerda que si quieres enviarnos una cotización, puedes ir a <Link to="/catalogo" className="text-Rojo underline">nuestro catálogo</Link>.</p>
                 </div>
                 {/* Formulario */}
                 <form onSubmit={handleSubmit}>
