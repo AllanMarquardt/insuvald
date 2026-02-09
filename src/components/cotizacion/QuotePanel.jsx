@@ -29,7 +29,7 @@ export default function QuotePanel() {
             `Gracias.`
 
 
-        const phoneNumber = '56993517952'
+        const phoneNumber = '56982638704'
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank')
     }
 

@@ -6,7 +6,8 @@ export function QuoteProvider({ children }) {
     const [quoteMode, setQuoteMode] = useState(() => {
         // Cargar estado del modo cotización
         const savedMode = localStorage.getItem('insuvald-quote-mode')
-        return savedMode === 'true'
+        // return savedMode === 'true'
+        return savedMode === null ? true : savedMode === 'true'
     })
     const [quoteItems, setQuoteItems] = useState(() => {
         // Cargar productos guardados al iniciar

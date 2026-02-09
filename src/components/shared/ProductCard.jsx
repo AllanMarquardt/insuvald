@@ -1,10 +1,15 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useQuote } from '../../context/QuoteContext'
+import { useLocation } from 'react-router-dom'
 
 export default function ProductCard({ image, title, price, productData }) {
     const { quoteMode, addItem } = useQuote()
     const [quantity, setQuantity] = useState(1)
+    const location = useLocation()
+    
+    // Solo mostrar controles de cotización en la página de catálogo
+    const showQuoteControls = quoteMode && location.pathname === '/catalogo'
 
     const handleAdd = () => {
         if (productData) {
@@ -20,8 +25,8 @@ export default function ProductCard({ image, title, price, productData }) {
     }
 
     return (
-        <div className={`bg-Blanco pt-4 h-78 w-55 relative overflow-hidden shadow-md transition-all duration-300 group ${
-            quoteMode ? 'ring-2 ring-Amarillo shadow-lg shadow-Amarillo/20' : ''
+        <div className={`bg-Blanco pt-4 h-88 w-70 sm:w-55 relative overflow-hidden shadow-md transition-all duration-300 group ${
+            showQuoteControls ? 'ring-2 ring-Amarillo shadow-lg shadow-Amarillo/20' : ''
         }`}>
             {/* Círculo rojo */}
             <div className="bg-[#DD002B] absolute w-35 h-35 rounded-full -bottom-20 left-1/2 transform -translate-x-1/2"></div>
@@ -30,7 +35,7 @@ export default function ProductCard({ image, title, price, productData }) {
             <div className="bg-Negro absolute w-10 h-1.5 bottom-0 left-1/2 transform -translate-x-1/2"></div>
             {/* Card content */}
             <div className="w-[80%] h-[60%] flex flex-col items-center mx-auto">
-                <img src={image} alt={title} className="h-[85%] w-full object-contain drop-shadow-2xl mb-4 group-hover:scale-120 group-hover:rotate-2 transition duration-400 ease-out" />
+                <img src={image} alt={title} className="h-[85%] w-full object-contain drop-shadow-2xl mt-4 mb-4 group-hover:scale-120 group-hover:rotate-2 transition duration-400 ease-out" />
                 <span className="uppercase text-center font-light tracking-wide text-lg text-Negro leading-4.5">{title}</span>
             </div>
             {/* Precio */}
@@ -38,7 +43,7 @@ export default function ProductCard({ image, title, price, productData }) {
 
             {/* Controles de cotización (condicional) */}
             <AnimatePresence>
-                {quoteMode && (
+                {showQuoteControls && (
                     <motion.div
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -50,7 +55,7 @@ export default function ProductCard({ image, title, price, productData }) {
                         <div className="flex items-center justify-center gap-1">
                             <button
                                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                className="w-8 h-8 rounded-full bg-Crema hover:bg-Rojo hover:text-white transition flex items-center justify-center text-Negro font-bold border border-Negro/50 cursor-pointer"
+                                className="w-8 h-8 rounded-full bg-Crema hover:bg-Rojo hover:text-white transition flex items-center justify-center text-3xl text-Negro border border-Negro/50 cursor-pointer"
                             >
                                 -
                             </button>
@@ -59,7 +64,7 @@ export default function ProductCard({ image, title, price, productData }) {
                             </span>
                             <button
                                 onClick={() => setQuantity(Math.min(999, quantity + 1))}
-                                className="w-8 h-8 rounded-full bg-Crema hover:bg-green-500 hover:text-white transition flex items-center justify-center text-Negro font-bold border border-Negro/50 cursor-pointer"
+                                className="w-8 h-8 rounded-full bg-Crema hover:bg-green-500 hover:text-white transition flex items-center justify-center text-3xl text-Negro border border-Negro/50 cursor-pointer"
                             >
                                 +
                             </button>

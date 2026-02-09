@@ -49,15 +49,15 @@ export default function Contacto(){
         // Enviar el formulario usando EmailJS
         try {
             const result = await emailjs.send(
-                'service_s185hlc',
-                'template_kk5isa8',
+                'service_dfya0di',
+                'template_4j4gy4g',
                 {
                     nombre: formData.nombre,
                     correo: formData.correo,
                     telefono: formData.telefono || 'No proporcionado',
                     mensaje: formData.mensaje
                 },
-                'vuBgsNGHNJy1Twvyb'
+                'xnpBD5Mv5XrwwLi8P'
             )
 
             if (result.text === 'OK') {

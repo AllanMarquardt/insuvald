@@ -22,7 +22,7 @@ export default function Despachos() {
                             <img 
                                 src={Valdivia} 
                                 alt="Foto de Valdivia" 
-                                className='rounded-full w-full h-full object-cover outline-dashed outline-[#D6BDF1] outline-6 -outline-offset-3 group-hover:scale-110 transition-transform duration-500'
+                                className='rounded-full w-full h-full object-cover outline-dashed outline-[#D6BDF1] outline-6 -outline-offset-3 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(214,189,241,0.3)] transition-all duration-300 ease-out'
                             />
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#E1E1E1" className="size-22">
@@ -37,7 +37,7 @@ export default function Despachos() {
                             <img 
                                 src={SanJose} 
                                 alt="Foto de San Jose" 
-                                className='rounded-full w-full h-full object-cover outline-dashed outline-[#B64F3C] outline-6 -outline-offset-3 group-hover:scale-110 transition-transform duration-500'
+                                className='rounded-full w-full h-full object-cover outline-dashed outline-[#B64F3C] outline-6 -outline-offset-3 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(182,79,60,0.3)] transition-all duration-300 ease-out'
                             />
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#E1E1E1" className="size-22">

@@ -42,8 +42,8 @@ export default function EmailModal({ isOpen, onClose, quoteItems, total }) {
 
         try {
             const result = await emailjs.send(
-                'service_s185hlc',
-                'template_btl174q',
+                'service_dfya0di',
+                'template_zzafo1i',
                 {
                     nombre: formData.nombre,
                     correo: formData.correo,
@@ -53,7 +53,7 @@ export default function EmailModal({ isOpen, onClose, quoteItems, total }) {
                     total: total.toLocaleString('es-CL'),
                     mensaje: formData.mensaje || ''
                 },
-                'vuBgsNGHNJy1Twvyb'
+                'xnpBD5Mv5XrwwLi8P'
             )
 
             if (result.text === 'OK') {
@@ -101,7 +101,7 @@ export default function EmailModal({ isOpen, onClose, quoteItems, total }) {
                     >
                         {/* Header */}
                         <div className="bg-Rojo text-white p-4 flex items-center justify-between">
-                            <h3 className="text-xl font-bold">Enviar Cotización</h3>
+                            <h3 className="text-xl font-bold">Enviar Cotización (Email)</h3>
                             <button
                                 onClick={onClose}
                                 className="w-8 h-8 rounded-full hover:bg-white/20 transition flex items-center justify-center"
